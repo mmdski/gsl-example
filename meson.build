@@ -7,6 +7,5 @@ inc = include_directories('include')
 cc = meson.get_compiler('c')
 
 subdir('lib')
-
-app = executable('app', 'main.c', include_directories : inc,
-    dependencies : [gsl, cblas])
+subdir('src')
+subdir('app')
