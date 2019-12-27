@@ -4,3 +4,5 @@
 # binary python extensions
 *.so
 *.pyd
+
+*.egg-info
