@@ -22,5 +22,5 @@ ext_modules = [
 ]
 
 setup(name="example",
-      ext_modules=cythonize(ext_modules)
+      ext_modules=cythonize(ext_modules, annotate=True)
       )
