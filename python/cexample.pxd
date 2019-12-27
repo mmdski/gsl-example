@@ -1,2 +1,2 @@
 cdef extern from "example.h":
-    float bessel(float x)
+    double bessel(double x)
