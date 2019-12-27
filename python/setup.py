@@ -10,6 +10,13 @@ if platform.system() == 'Linux':
         'extra_objects': ["../build/src/libexample.a"]
     }
 
+elif platform.system() == 'Windows':
+    extension_kwargs = {
+        'sources': ['example.pyx'],
+        'include_dirs': ["../include/"],
+        'extra_objects': ["../build/src/example.lib", "../lib/gsl.lib"]
+    }
+
 ext_modules = [
     Extension("example", **extension_kwargs)
 ]
