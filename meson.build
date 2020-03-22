@@ -6,6 +6,5 @@ inc = include_directories('include')
 
 cc = meson.get_compiler('c')
 
-subdir('lib')
 subdir('src')
 subdir('app')
