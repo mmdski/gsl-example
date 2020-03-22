@@ -2,36 +2,74 @@
 
 ## Building on Windows
 
-1. Clone the gsl-example repository.
+Download and install 
+[C++ Built Tools][1] from Microsoft.
 
-1. Download and install [C++ Built Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) from Microsoft.
+### Install pkg-config
 
-1. Clone [this](https://github.com/BrianGladman/gsl) gsl repository.
+#### Install GLib
 
-1. From a Developer Command Prompt, navigate to the `build.vc` directory in the gsl repository.
+GLib requires meson and ninja.
 
-1. Build the gslhdrs project.
+```
+pip install --user meson ninja
+```
+
+1. Clone the [GLib repository][2]. Check out the latest version with Git.
+
+1. Build, test, and install the GLib repository.
+
+    (This will install everything with prefix `C:\`. 
+    From a Developer Command Prompt,
     ```
-    >MSBuild gslhdrs\gslhdrs.vcxproj -property:Configuration=Release
+    >mkdir build
+    >cd build
+    >meson .. --buildtype=release
+    >ninja
+    >meson test
+    >meson install
     ```
-1. Build the cbls project.
+1. Place `C:\bin` on your path.
+
+#### Build and install pkg-config
+1. Download the [pkg-config][3] source. Unzip the source directory.
+
+1. Modify the `GLIB_PREFIX` variable in the `Makefile.vc` file so the value is 
+`C:\`. This points the build configuration to the location of GLib.
+
     ```
-    >MSBuild cblaslib\cblaslib.vcxproj -property:Configuration=Release
+    GLIB_PREFIX = C:\
     ```
 
-1. Build the gslib project.
+1.  Navigate to the source directory in a Developer Command Prompt. From the 
+prompt,
+
     ```
-    >MSBuild gsllib\gsllib.vcxproj -property:Configuration=Release
+    >nmake /f Makefile.vc CFG=release
     ```
 
-1. Copy the cblas and gsl library files to the `lib` directory of this project. The files are located in `gsl\bluild.vc\lib\<Win32|x64>\Release`.
+1. Copy the `pkg-config.exe` file from `release\x64` in the pkg-config source 
+directory to `C:\bin`.
 
-    * cblas.lib
-    * cblas.pdb
-    * gsl.lib
-    * gsl.pdb
+#### Build and install gsl
 
-1. Copy the header files from the gsl project to `include\gsl` directory in this repository.
+1. Clone [this][4] gsl repository.
+
+1. Run a Developer Command Prompt as an administrator. Navigate to the directory
+that contains the repository.
+
+1. From the Developer Command Prompt,
+
+```
+>mkdir build
+>cd build
+>cmake -DARCH=64 -DNO_AMPL_BINDINGS=true -DCMAKE_INSTALL_PREFIX=C:\ ..
+>cmake --build . --config Release --target gsl
+>ctest
+>cmake --build . --config Release --target install
+```
+
+#### Clone and build this project
 
 1. In a Developer Command Prompt, navigate to this repository and create a Python virtual environment, activate the environment, and install the requirements.
 
@@ -46,8 +84,6 @@
 
 1. Build and test the Python extension.
 
-    Navigate to the `python` directory.
-
     Run the build command.
     ```
     (env) python>python setup.py build_ext --inplace
@@ -58,9 +94,13 @@
     (env) python>python
     Python 3.7.6 (tags/v3.7.6:43364a7ae0, Dec 19 2019, 00:42:30) [MSC v.1916 64 bit (AMD64)] on win32
     Type "help", "copyright", "credits" or "license" for more information.
-    >>> from example import bessel
+    >>> from example.example import bessel
     >>> bessel(5)
     -0.17759677131433826
     >>>
     ```
 
+[1]: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+[2]: https://github.com/GNOME/glib
+[3]: https://www.freedesktop.org/wiki/Software/pkg-config/
+[4]: https://github.com/ampl/gsl
