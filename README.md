@@ -76,8 +76,8 @@ that contains the repository.
 1. Build and run the executable file.
 
     ```
-    (env) > meson build && ninja -C build
-    (env) > build\app\app.exe
+    (env) >meson build && ninja -C build
+    (env) >build\app\app.exe
     J0(5) = -1.775967713143382642e-01
 
     ```
@@ -91,7 +91,7 @@ that contains the repository.
 
     Import the module and test the bessel function.
     ```
-    (env) python>python
+    (env) >python
     Python 3.7.6 (tags/v3.7.6:43364a7ae0, Dec 19 2019, 00:42:30) [MSC v.1916 64 bit (AMD64)] on win32
     Type "help", "copyright", "credits" or "license" for more information.
     >>> from example.example import bessel
