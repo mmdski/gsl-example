@@ -2,14 +2,16 @@
 
 ## Building on Windows
 
-Download and install 
+Download and install
 [C++ Built Tools][1] from Microsoft.
 
 ### Install pkg-config
 
+pkg-config requires GLib.
+
 #### Install GLib
 
-GLib requires meson and ninja.
+GLib requires meson and ninja. Install them with pip.
 
 ```
 pip install --user meson ninja
@@ -19,7 +21,7 @@ pip install --user meson ninja
 
 1. Build, test, and install the GLib repository.
 
-    (This will install everything with prefix `C:\`. 
+    This will install everything with prefix `C:\`.
     From a Developer Command Prompt,
     ```
     >mkdir build
@@ -34,29 +36,28 @@ pip install --user meson ninja
 #### Build and install pkg-config
 1. Download the [pkg-config][3] source. Unzip the source directory.
 
-1. Modify the `GLIB_PREFIX` variable in the `Makefile.vc` file so the value is 
+1. Modify the `GLIB_PREFIX` variable in the `Makefile.vc` file so the value is
 `C:\`. This points the build configuration to the location of GLib.
 
     ```
     GLIB_PREFIX = C:\
     ```
 
-1.  Navigate to the source directory in a Developer Command Prompt. From the 
+1.  Navigate to the source directory in a Developer Command Prompt. From the
 prompt,
 
     ```
     >nmake /f Makefile.vc CFG=release
     ```
 
-1. Copy the `pkg-config.exe` file from `release\x64` in the pkg-config source 
+1. Copy the `pkg-config.exe` file from `release\x64` in the pkg-config source
 directory to `C:\bin`.
 
-#### Build and install gsl
+### Build and install gsl
 
 1. Clone [this][4] gsl repository.
 
-1. Run a Developer Command Prompt as an administrator. Navigate to the directory
-that contains the repository.
+1. Navigate to the directory that contains the gsl repository in a Developer Command Prompt.
 
 1. From the Developer Command Prompt,
 
@@ -64,12 +65,12 @@ that contains the repository.
 >mkdir build
 >cd build
 >cmake -DARCH=64 -DNO_AMPL_BINDINGS=true -DCMAKE_INSTALL_PREFIX=C:\ ..
->cmake --build . --config Release --target gsl
+>cmake --build . --config Release
 >ctest
 >cmake --build . --config Release --target install
 ```
 
-#### Clone and build this project
+### Clone and build this project
 
 1. In a Developer Command Prompt, navigate to this repository and create a Python virtual environment, activate the environment, and install the requirements.
 
@@ -86,7 +87,7 @@ that contains the repository.
 
     Run the build command.
     ```
-    (env) python>python setup.py build_ext --inplace
+    (env) >python setup.py build_ext --inplace
     ```
 
     Import the module and test the bessel function.
