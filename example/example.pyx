@@ -1,6 +1,6 @@
 #  cython : language_level=3
 
-cimport cexample
+cimport example.cexample as cexample
 
 def bessel(x):
     return cexample.bessel(x)

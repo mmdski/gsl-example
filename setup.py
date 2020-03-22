@@ -6,9 +6,9 @@ import subprocess
 
 def pkgconfig(package, kw):
     flag_map = {'-I': 'include_dirs', '-L': 'library_dirs', '-l': 'libraries'}
-    completed_process = subprocess.run(
-        ['pkg-config', '--cflags', '--libs', package], capture_output=True)
-    for token in completed_process.stdout.decode('UTF8').strip().split():
+    output = subprocess.getoutput(
+        'pkg-config --cflags --libs {}'.format(package))
+    for token in output.strip().split():
         kw.setdefault(flag_map.get(token[:2]), []).append(token[2:])
     return kw
 
