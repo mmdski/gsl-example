@@ -6,5 +6,7 @@ inc = include_directories('include')
 
 cc = meson.get_compiler('c')
 
+glib_dep = dependency('glib-2.0')
+
 subdir('src')
 subdir('app')
