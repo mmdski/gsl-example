@@ -30,5 +30,6 @@ example_ext = Extension('example.example', **extension_kwargs)
 
 setup(name="example",
       ext_modules=cythonize([example_ext], annotate=True),
-      packages=['example']
+      packages=['example'],
+      python_requires='>2.7, <3.8'
       )
