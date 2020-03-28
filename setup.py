@@ -21,6 +21,8 @@ extension_kwargs = {
 }
 
 extension_kwargs = pkgconfig('gsl', extension_kwargs)
+extension_kwargs = pkgconfig('glib-2.0', extension_kwargs)
+
 if platform.system() == 'Windows':
     extension_kwargs['libraries'].remove('m')
 
