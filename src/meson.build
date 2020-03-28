@@ -1,5 +1,5 @@
 sources = ['example.c']
-gsl_dep = dependency('gsl')
+gsl_dep = dependency('gsl', static : true)
 
 if target_machine.system() == 'windows'
     examplelib = static_library('example',
