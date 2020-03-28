@@ -3,3 +3,4 @@ Cython
 meson
 ninja
 pylint
+wheel
