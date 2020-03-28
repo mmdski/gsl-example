@@ -5,6 +5,6 @@
 
 extern double bessel (double x);
 
-gboolean ex_raise_error (GError **error);
+int ex_raise_error (GError **error);
 
 #endif
